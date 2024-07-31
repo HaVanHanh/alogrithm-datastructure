@@ -15,6 +15,17 @@ public class LEC200NumberOfIsland {
         for (int i = 0; i < 4; i++) {
             int newX = x + dx[i];
             int newY = y + dy[i];
+            System.out.printf(
+                    """
+                    - i = %d
+                        (*) [x,y] =[%d,%d]
+                        (*) newX = %d + dx[%d] = %s
+                        (*) newY = %d + dy[%d] = %s
+                        (*) => grid[%s][%s]
+                        (*) isValid = %s
+                    """,
+                    i, x, y, x, i, newX, y, i, newY, newX, newY, isValid(newX, newY, n, m)
+            );
             if (isValid(newX, newY, n, m)) {
                 dfs(newX, newY, n, m);
             }
@@ -28,16 +39,23 @@ public class LEC200NumberOfIsland {
         int count = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
+
                 if (grid[i][j] == '1') {
                     count++;
+                    System.out.printf("========= init I = %d, J = %d ===========\n", i, j);
                     dfs(i, j, n, m);
                 }
+
             }
         }
         return count;
     }
 
     public static void main(String[] args) {
+        /*
+            int[] dx = {0, 0, 1, -1};
+            int[] dy = {1, -1, 0, 0};
+         */
         char[][] grid = {
             {'1', '1', '0', '0', '0'},
             {'1', '1', '0', '0', '0'},
